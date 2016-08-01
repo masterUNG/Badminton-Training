@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainHub"></activity>
+        <activity android:name=".MainHub" />
+        <activity android:name=".RulesActivity"></activity>
     </application>
 
 </manifest>
