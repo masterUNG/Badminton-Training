@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainHub" />
-        <activity android:name=".RulesActivity"></activity>
+        <activity android:name=".RulesActivity" />
+        <activity android:name=".VideoActivity"></activity>
     </application>
 
 </manifest>
