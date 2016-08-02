@@ -1,11 +1,16 @@
 package appewtc.masterung.badmintontraining;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -108,11 +113,50 @@ public class VideoActivity extends AppCompatActivity {
                         imageStrings, titleStrings, detailShortStrings);
                 myListView.setAdapter(videoAdapter);
 
+                myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        myAlertDialog(i);
+
+                    }
+                });
+
             } catch (Exception e) {
                 Log.d("kanV1", "e onPost ==> " + e.toString());
             }
 
         }   // onPost
+
+        private void myAlertDialog(final int intIndex) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
+            builder.setIcon(R.drawable.doremon48);
+            builder.setTitle(titleStrings[intIndex]);
+            builder.setMessage(detailStrings[intIndex]);
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setPositiveButton("Watch Video", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(videoStrings[intIndex]));
+                    startActivity(intent);
+
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.show();
+
+
+
+        }   // myAlertDialog
 
     }   // SynVideo Class
 
