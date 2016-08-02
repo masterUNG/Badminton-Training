@@ -2,8 +2,8 @@ package appewtc.masterung.badmintontraining;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +12,9 @@ import android.widget.ListView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class VideoActivity extends AppCompatActivity {
 
@@ -48,6 +51,9 @@ public class VideoActivity extends AppCompatActivity {
         private Context context;
         private ListView myListView;
         private static final String urlJSON = "http://swiftcodingthai.com/kan/get_video.php";
+        private String[] titleStrings, detailStrings,
+                imageStrings, videoStrings, detailShortStrings;
+
 
         public SynchronizeVideo(Context context, ListView myListView) {
             this.context = context;
@@ -76,6 +82,35 @@ public class VideoActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("kanV1", "JSON ==> " + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                titleStrings = new String[jsonArray.length()];
+                detailStrings = new String[jsonArray.length()];
+                imageStrings = new String[jsonArray.length()];
+                videoStrings = new String[jsonArray.length()];
+                detailShortStrings = new String[jsonArray.length()];
+
+                for (int i = 0; i < jsonArray.length(); i += 1) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    titleStrings[i] = jsonObject.getString("Title");
+                    detailStrings[i] = jsonObject.getString("Detail");
+                    imageStrings[i] = jsonObject.getString("Image");
+                    videoStrings[i] = jsonObject.getString("Video");
+                   detailShortStrings[i] = detailStrings[i].substring(0, 30) + "...";
+
+                }   // for
+
+                VideoAdapter videoAdapter = new VideoAdapter(context,
+                        imageStrings, titleStrings, detailShortStrings);
+                myListView.setAdapter(videoAdapter);
+
+            } catch (Exception e) {
+                Log.d("kanV1", "e onPost ==> " + e.toString());
+            }
 
         }   // onPost
 
