@@ -52,6 +52,15 @@
                 android:textSize="@dimen/h2"
                 android:textColor="@color/text" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rules3"
+                android:id="@+id/textView19"
+                android:textSize="@dimen/h2"
+                android:textColor="@color/text"
+                android:layout_marginTop="15dp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
