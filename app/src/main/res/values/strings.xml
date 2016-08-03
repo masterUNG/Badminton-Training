@@ -9,5 +9,6 @@
     <string name="rules1">text</string>
     <string name="rules2">text</string>
     <string name="rules3">text</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
