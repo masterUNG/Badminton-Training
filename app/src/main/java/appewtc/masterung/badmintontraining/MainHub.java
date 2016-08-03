@@ -50,6 +50,7 @@ public class MainHub extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.imageView4:   // to นับคะแนน
                 confirmCountScore();
+
                 break;
             case R.id.imageView5:   // to แสดงแผนที่ สนาม
                 startActivity(new Intent(MainHub.this, MapsActivity.class));
@@ -73,6 +74,7 @@ public class MainHub extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startActivity(new Intent(MainHub.this, FourPlayer.class));
+                finish();
                 dialogInterface.dismiss();
             }
         });
@@ -80,6 +82,7 @@ public class MainHub extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startActivity(new Intent(MainHub.this, TwoPlayer.class));
+                finish();
                 dialogInterface.dismiss();
             }
         });

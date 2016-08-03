@@ -1,5 +1,7 @@
 package appewtc.masterung.badmintontraining;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ public class CheckScore extends AppCompatActivity {
             scoreATextView, scoreBTextView;
     private String playerAString, playerBString;
     private int scoreAnInt = 0, scoreBAnInt = 0;
+    private boolean statusABoolean = true; //true สภาวะปกติ false สถาวะดิว
 
 
     @Override
@@ -88,7 +91,68 @@ public class CheckScore extends AppCompatActivity {
 
         scoreShow.setText(Integer.toString(intShowScore));
 
+        //Check Status
+        if ((scoreAnInt == 20) && (scoreBAnInt == 20)) {
+            statusABoolean = false; // มีดิวเกิดขึ้น
+        }
+
+        //Check Score
+        if (statusABoolean) {
+            // ปกติ
+
+            if (scoreAnInt == 21) {
+                alertScore(playerAString, scoreAnInt, scoreBAnInt);
+            } else if (scoreBAnInt == 21) {
+                alertScore(playerBString, scoreBAnInt, scoreAnInt);
+            }
+
+        } else {
+            // ดิว
+        }
+
     }   // checkScore
+
+    private void alertScore(String strWin, int intScoreWin, int intScoreLost) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setIcon(R.drawable.doremon48);
+        builder.setTitle("ยินดีในชัยชนะ คุณ " + strWin);
+        builder.setMessage("คะแนนของคุณ " +
+                Integer.toString(intScoreWin) +
+                " : " +
+                Integer.toString(intScoreLost));
+        builder.setNegativeButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNeutralButton("Play Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                resetAll();
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.show();
+
+    }   // alertScore
+
+    private void resetAll() {
+
+        scoreAnInt = 0;
+        scoreBAnInt = 0;
+        scoreATextView.setText("0");
+        scoreBTextView.setText("0");
+
+    }
 
 
 }   // Main Class
