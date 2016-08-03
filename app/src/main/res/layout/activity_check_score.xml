@@ -99,7 +99,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Player A"
             android:id="@+id/textView22"
             android:textSize="@dimen/h1"
             android:textStyle="bold"
@@ -111,7 +110,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Player B"
             android:id="@+id/textView23"
             android:textSize="@dimen/h1"
             android:textStyle="bold"

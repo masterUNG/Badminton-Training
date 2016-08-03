@@ -72,12 +72,14 @@ public class MainHub extends AppCompatActivity implements View.OnClickListener {
         builder.setNegativeButton("คู่", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(MainHub.this, FourPlayer.class));
                 dialogInterface.dismiss();
             }
         });
         builder.setPositiveButton("เดี่ยว", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(MainHub.this, TwoPlayer.class));
                 dialogInterface.dismiss();
             }
         });
