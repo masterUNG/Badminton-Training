@@ -11,9 +11,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -65,6 +69,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Log.d("kanV3", "JSON ==> " + s);
 
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+                for (int i = 0; i < jsonArray.length(); i += 1) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String strName = jsonObject.getString("Name");
+                    String strAddress = jsonObject.getString("Address");
+                    String strPhone = jsonObject.getString("Phone");
+                    String strLat = jsonObject.getString("Lat");
+                    String strLng = jsonObject.getString("Lng");
+
+                    LatLng latLng = new LatLng(Double.parseDouble(strLat),
+                            Double.parseDouble(strLng));
+                    courtGoogleMap.addMarker(new MarkerOptions()
+                    .position(latLng));
+
+                }   // for
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }   // onPost
 
@@ -79,7 +107,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double lng = 100.627332;
         LatLng latLng = new LatLng(lat, lng);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-
 
         SynCourt synCourt = new SynCourt(this, mMap);
         synCourt.execute();
