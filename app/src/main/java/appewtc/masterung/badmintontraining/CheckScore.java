@@ -162,6 +162,7 @@ public class CheckScore extends AppCompatActivity {
         scoreBAnInt = 0;
         scoreATextView.setText("0");
         scoreBTextView.setText("0");
+        statusABoolean = true;
 
     }
 
