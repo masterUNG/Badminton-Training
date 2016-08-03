@@ -108,7 +108,18 @@ public class CheckScore extends AppCompatActivity {
 
         } else {
             // ดิว
-        }
+
+            if ((scoreAnInt - scoreBAnInt) >= 2) {
+                alertScore(playerAString, scoreAnInt, scoreBAnInt);
+            } else if ((scoreBAnInt - scoreAnInt) >= 2) {
+                alertScore(playerBString, scoreBAnInt, scoreBAnInt);
+            } else if (scoreAnInt == 30) {
+                alertScore(playerAString, scoreAnInt, scoreBAnInt);
+            } else if (scoreBAnInt == 30) {
+                alertScore(playerBString, scoreBAnInt, scoreBAnInt);
+            }
+
+        }   // if
 
     }   // checkScore
 
